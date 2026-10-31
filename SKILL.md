@@ -15,6 +15,15 @@ description: Create visual concepts, image-generation prompts, and optional AI-g
 不要暴露、索要、写入、提交或回显真实 API key。使用者必须通过自己的环境变量配置 API。
 
 ---
+## 核心执行原则：款式与细节绝对锁定（Garment Lock Rules）
+
+当任务涉及服装、箱包或带参考实物图的产品时，无论何种模式均须执行：
+1. 1:1 款式复刻：严格保持参考图的廓形、肩袖结构、衣长与下摆剪裁，严禁自行重新设计。
+2. 五金与拉链硬锁定：精确保持拉链朝向与开合结构（垂直/斜拉链），精确复刻金属按扣、搭扣位置与数量，禁止增减配件。
+3. 材质拼接边界锁定：严格保持麂皮、羊羔毛等异材质的拼接分界线，袖口螺纹与包边完全一致。
+4. 强制后缀防形变词：
+   - 正面必须追加：1:1 exact clothing structure replication from reference image, exact hardware and zipper track, precise seam lines, identical fabric splicing and patch placement, preserve original garment silhouette
+   - 负面必须追加：altered garment design, modified zipper, wrong zipper position, extra buttons, missing hardware, added pockets, changed seam lines, distorted collar, wrong fabric texture, redrawn clothing, loose threads, deformed cuffs
 
 ## 生图通道判断（Generate 模式必读）
 
