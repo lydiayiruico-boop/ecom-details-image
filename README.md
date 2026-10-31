@@ -10,6 +10,8 @@
 
 未安装 apiz CLI 时，它仍然可以正常输出 Prompt；CLI 就绪后，可以直接出图。 建议请先安装[apiz](https://apiz.ai) 官方 CLI 。
 
+### 兄弟项目 - 跨境电商调研skill:
+https://github.com/liangdabiao/Amazon-Skills-Liang
 
 
 ## 适用场景
