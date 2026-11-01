@@ -159,6 +159,23 @@ description: Create visual concepts, image-generation prompts, and optional AI-g
 
 ---
 
+## 规格参数表格自动读取协议（Product Specs Ingestion Protocol - Windows/Cross-Platform）
+
+在启动任何生图与详情页渲染任务前，Skill 必须首先执行参数挂载：
+
+1. **文件默认读取路径（自适应当前系统桌面）**：
+   - **Windows 桌面**：`%USERPROFILE%\Desktop\style-references\product_specs.csv`
+   - **备用工程路径**：项目根目录下 `./style-references/product_specs.csv` 或 `./product_specs.csv`
+   - **编码要求**：统一采用 UTF-8 编码读取。
+
+2. **数据映射机制（提取用户指定 <款号> 数据）**：
+   - **款号/品名**：映射至详情页第 01 屏标题与第 02 屏【商品编号】
+   - **面料/里料**：1:1 提取并排版至第 02 屏【面料成分】及第 05 屏【材质科普】
+   - **洗涤建议**：1:1 输出至第 02 屏【洗涤建议】及第 10 屏【洗护说明】
+   - **尺码矩阵**：自动聚合 S/M/L 各行测量数据并排版至第 10 屏【商品尺寸表】
+
+---
+
 ## 生图通道判断（Generate 模式必读）
 
 直接生图前必须先判断当前运行环境，选择对应通道：
