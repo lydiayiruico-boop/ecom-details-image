@@ -25,6 +25,42 @@ description: Create visual concepts, image-generation prompts, and optional AI-g
    - 正面必须追加：1:1 exact clothing structure replication from reference image, exact hardware and zipper track, precise seam lines, identical fabric splicing and patch placement, preserve original garment silhouette
    - 负面必须追加：altered garment design, modified zipper, wrong zipper position, extra buttons, missing hardware, added pockets, changed seam lines, distorted collar, wrong fabric texture, redrawn clothing, loose threads, deformed cuffs
 
+## 两阶段流水线：母版审核与分平台打包（Two-Stage Pipeline）
+
+为了杜绝多次生图导致的款式变形，并最大化节省 Token，本 Skill 强制执行“先审母版，再批量分流”的工作流程：
+
+### 阶段一：通用母版审核（Review Mode）
+1. 用户提供服装或产品图后，默认仅输出 **1 套 3:4 比例的标准主视觉图** 及文案卖点拆解。
+2. 必须包含：
+   - 【款式特征锚定清单】（核对领型、衣长、拉链走向、金属扣数量与拼接边界）
+   - 【核心卖点提炼】
+   - 【通用主视觉生图 Prompt】
+3. 阶段一输出完成后，必须在末尾提示用户：
+   > `【视觉与文案待审：若款式、光影与文案无误，请回复“确认通过，开始分平台打包”；如有修改请直接指出】`
+
+---
+
+### 阶段二：多平台规格分流与打包（Distribute & Package Mode）
+仅在收到用户“确认”、“通过”、“开始打包”等指令后，方可触发阶段二。系统必须自动读取以下平台规格参数，分别生成对应构图，并创建专属子文件夹进行归档：
+
+#### 1. 拼多多通道（Pinduoduo Channel）
+* **主图规格**：800 × 800 px（1:1 正方形）
+* **视觉策略**：主体饱满居中、高对比度、清晰展示外形轮廓与保暖实穿属性。
+* **详情页切片**：宽 750 px，单张高 1200 px。
+* **文件存储路径**：`generated-images/<产品款号>/PDD/`
+
+#### 2. 淘宝通道（Taobao Channel）
+* **主图规格**：800 × 1200 px（2:3 竖版大图）为主，配 800 × 800 px（1:1）方图。
+* **视觉策略**：强调自然光影、生活方式穿搭氛围、Clean Fit 质感与细节呼应。
+* **详情页切片**：宽 750 px，单张高 1200–1500 px。
+* **文件存储路径**：`generated-images/<产品款号>/Taobao/`
+
+#### 3. 1688 通道（1688 B2B Channel）
+* **主图规格**：800 × 800 px（1:1）及 750 × 1000 px（3:4 竖版）。
+* **视觉策略**：突出面料肌理特写（如麂皮短绒触感、羊羔毛颗粒卷曲度）、拉链五金做工与侧后身版型。
+* **详情页切片**：宽 750 px，包含结构解析图、面料参数模块。
+* **文件存储路径**：`generated-images/<产品款号>/1688/`
+
 ## 生图通道判断（Generate 模式必读）
 
 直接生图前必须先判断当前运行环境，选择对应通道：
