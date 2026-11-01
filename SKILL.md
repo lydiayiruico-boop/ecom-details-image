@@ -39,6 +39,19 @@ description: Create visual concepts, image-generation prompts, and optional AI-g
 
 ---
 
+## 动态风格资产池协议（Style Pool Protocol）
+
+Skill 支持自动读取参考图文件夹（本地路径：`~/Desktop/style-references/` 或仓库路径：`references/styles/`）。用户可在该文件夹中自由增减图片：
+
+1. **自动提取与解耦**：
+   - 自动提取文件夹内最新图片的模特面容、妆发风格、场景构图（如现代建筑、极简街道）与光影色调。
+   - **绝对款式隔离（Garment Isolation）**：严禁采纳参考图里的衣服款式！当前衣服的版型剪裁、前中垂直拉链、金属四合扣与麂皮/羊羔毛拼接交界线，必须严格 1:1 锁定用户当前上传的商品图。
+2. **候选机制**：
+   - 若文件夹有多张图，自动提炼出两种风格偏向（风格 A vs 风格 B）供用户挑选。
+   - 若文件夹为空，自动回退为默认的 Clean Fit 极简影棚模特风格。
+
+---
+
 ## 阶段一：双风格候选与母版审阅（Dual-Style Pitch & Review）
 
 在生成最终成图前，必须为当前服装提供**两种不同维度的视觉风格提案（Style A vs Style B）**供用户挑选：
